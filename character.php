@@ -19,7 +19,16 @@
  */
 ?>
 
+<?php /* Display navigation to next/previous pages when applicable */ ?>
+<?php if ( $wp_query->max_num_pages > 1 ) : ?>
+	<nav id="nav-above" class="navigation">
+		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'boilerplate' ) ); ?></div>
+		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'boilerplate' ) ); ?></div>
+	</nav><!-- #nav-above -->
+<?php endif; ?>
+
 <?php /* If there are no posts to display, such as an empty archive page */ ?>
+<div class="foo"></div>
 <?php if ( ! have_posts() ) : ?>
 	<article id="post-0" class="post error404 not-found">
 		<h1 class="entry-title"><?php _e( 'Not Found', 'boilerplate' ); ?></h1>
@@ -30,31 +39,17 @@
 	</article><!-- #post-0 -->
 <?php endif; ?>
 
-<?php
-	/* Start the Loop.
-	 *
-	 * In Twenty Ten we use the same loop in multiple contexts.
-	 * It is broken into three main parts: when we're displaying
-	 * posts that are in the gallery category, when we're displaying
-	 * posts in the asides category, and finally all other posts.
-	 *
-	 * Additionally, we sometimes check for whether we are on an
-	 * archive page, a search page, etc., allowing for small differences
-	 * in the loop on each template without actually duplicating
-	 * the rest of the loop that is shared.
-	 *
-	 * Without further ado, the loop:
-	 */ ?>
-<?php while ( have_posts() ) : the_post(); ?>
-
-<?php /* How to display posts in the character category */ ?>
-
-	<?php if ( in_category( 'character' ) ) : ?>
+<?php query_posts( array('category_name' => 'character') ); while ( have_posts() ) : the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'boilerplate' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+
+		<div class="entry-meta">
+			<?php boilerplate_posted_on(); ?>
+		</div><!-- .entry-meta -->
 
 		<?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
 			<div class="entry-summary">
-				<?php the_excerpt(); ?>
+				<?php the_content(); ?>
 			</div><!-- .entry-summary -->
 		<?php else : ?>
 			<div class="entry-content">
@@ -69,9 +64,6 @@
 				<?php edit_post_link( __( 'Edit', 'boilerplate' ), '| ', '' ); ?>
 			</footer><!-- .entry-utility -->
 		</article><!-- #post-## -->
-
-	<?php endif; // This was the if statement that broke the loop into three parts based on categories. ?>
-
 <?php endwhile; // End the loop. Whew. ?>
 
 <?php /* Display navigation to next/previous pages when applicable */ ?>
