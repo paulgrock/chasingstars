@@ -11,7 +11,7 @@
  */
 ?>
 		</section><!-- #main -->
-		<footer role="contentinfo">
+		<footer role="contentinfo" class="site-size main-footer">
 <?php
 	/* A sidebar in the footer? Yep. You can can customize
 	 * your footer with four columns of widgets.

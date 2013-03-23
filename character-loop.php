@@ -24,7 +24,7 @@ get_header(); ?>
     <li>
       <h4 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'boilerplate' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>
     </li>
-    <?php endwhile; // End the loop. Whew. ?>
+    <?php endwhile;?>
   </ul>
 
   <div class="quarters-3 blog-roll extra-padding styled-bg">

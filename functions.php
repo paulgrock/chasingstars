@@ -561,4 +561,18 @@ endif;
 
 /*	End Boilerplate */
 
+/*	Custom Functions */
+
+//func is from http://wordpress.org/support/topic/excluding-category-from-widget
+function exclude_widget_categories($args){
+	//characters is id 3 on the server. 9 locally
+	//$exclude = "3";
+	$exclude = "character"; // The IDs of the excluding categories
+	$args["exclude"] = $exclude;
+	return $args;
+}
+add_filter("widget_categories_args","exclude_widget_categories");
+
+/*	End Customer Functions */
+
 ?>

@@ -28,7 +28,6 @@
 <?php endif; ?>
 
 <?php /* If there are no posts to display, such as an empty archive page */ ?>
-<div class="foo"></div>
 <?php if ( ! have_posts() ) : ?>
 	<article id="post-0" class="post error404 not-found">
 		<h1 class="entry-title"><?php _e( 'Not Found', 'boilerplate' ); ?></h1>
@@ -44,7 +43,6 @@
 		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'boilerplate' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
 		<div class="entry-meta">
-			<?php boilerplate_posted_on(); ?>
 		</div><!-- .entry-meta -->
 
 		<?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
@@ -58,10 +56,6 @@
 		<?php endif; ?>
 
 			<footer class="entry-utility">
-				<?php boilerplate_posted_on(); ?>
-				|
-				<?php comments_popup_link( __( 'Leave a comment', 'boilerplate' ), __( '1 Comment', 'boilerplate' ), __( '% Comments', 'boilerplate' ) ); ?>
-				<?php edit_post_link( __( 'Edit', 'boilerplate' ), '| ', '' ); ?>
 			</footer><!-- .entry-utility -->
 		</article><!-- #post-## -->
 <?php endwhile; // End the loop. Whew. ?>
